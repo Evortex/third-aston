@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: order-service
+  config:
+    import: "optional:configserver:http://config-service:8888/"
+  datasource:
+    url: jdbc:postgresql://postgres-order:5432/order_db
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+kafka:
+  bootstrap-servers: kafka:9092
+  topic: order-events

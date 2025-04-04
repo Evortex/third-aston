@@ -1,0 +1,18 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: ticket-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+  datasource:
+    url: jdbc:postgresql://localhost:5435/ticket_db
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

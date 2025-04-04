@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: "optional:configserver:http://config-service:8888/"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+spring.cloud.gateway.routes:
+  - id: order-service
+    uri: lb://order-service
+    predicates:
+      - Path=/api/orders/**
+  - id: payment-service
+    uri: lb://payment-service
+    predicates:
+      - Path=/api/payments/**
+  - id: ticket-service
+    uri: lb://ticket-service
+    predicates:
+      - Path=/api/tickets/**
